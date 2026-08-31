@@ -1,0 +1,24 @@
+# Virtual environments
+.venv/
+venv/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE settings
+.idea/
+.vscode/
+
+# ROS 2 / colcon output
+build/
+install/
+log/
+
+# Local legacy implementation retained only for reference
+/old_driver.py
+
