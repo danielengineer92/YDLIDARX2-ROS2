@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import Mock, patch
 
-from driver import (
+from ydlidar_x2_ros2.driver import (
     ChecksumError,
     InvalidPacketError,
     ScanPacket,
@@ -204,7 +204,10 @@ class ScanCollectionTests(unittest.TestCase):
         )
 
         # Prevent __init__ from opening a real serial device.
-        with patch("driver.serial.Serial", return_value=FakeSerial(b"")):
+        with patch(
+            "ydlidar_x2_ros2.driver.serial.Serial",
+            return_value=FakeSerial(b""),
+        ):
             driver = YDLidarX2("fake-port")
 
         driver.read_packet = Mock(side_effect=packets)
