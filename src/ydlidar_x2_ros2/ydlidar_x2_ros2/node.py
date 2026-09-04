@@ -82,9 +82,12 @@ class YDLidarX2Node(Node):
         ranges = [math.inf] * bin_count
 
         for point in points:
-            angle = math.radians(point.angle_deg)
+            # The X2 reports increasing angles clockwise, while ROS uses
+            # counter-clockwise-positive angles. Negating removes the
+            # left/right mirror; modulo keeps the result in 0-360 degrees.
+            angle = math.radians((-point.angle_deg) % 360.0)
 
-            # The driver uses 0 to 360 degrees. LaserScan will use -π to +π.
+            # LaserScan will use the conventional ROS range of -π to +π.
             if angle >= math.pi:
                 angle -= 2.0 * math.pi
 
